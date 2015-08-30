@@ -1,7 +1,7 @@
 # Extend Gosu::Window with the GameWindow class
 class GameWindow < Gosu::Window 
 	#Initialize as 320px by 240px window
-	def initialize width=320, height=240, fulscreen=false 
+	def initialize width=1024, height=768, fulscreen=true
 		#Super passes params from GameWindow to Gosu::Window
 		super 
 		#Window title caption
@@ -14,5 +14,9 @@ class GameWindow < Gosu::Window
 	#Call draw(x, y, z) on @message and set values
 	def draw
 		@message.draw(10, 10, 0)
+	end
+
+	def button_down id 
+		close if id == Gosu::KbEscape
 	end
 end
