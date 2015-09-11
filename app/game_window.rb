@@ -76,6 +76,9 @@ class GameWindow < Gosu::Window
 		down if button_down?(Gosu::KbDown)
 	end
 
+	# Apply changes to the gameobject's source image in accordance to
+	# current movement to emulate direction
+
 	def left 
 		# @obj.scale_x = -1.0 
 		@obj.source = "<"
