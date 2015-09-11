@@ -1,14 +1,28 @@
-# Extend Gosu::Image with our GameObject class
 class GameObject < Gosu::Image 
-	# Initialize GameObject with it's source image
-	def initialize source
-		@source = source	
+
+	attr_accessor :source, :window, :x, :y, :z, :angle, :scale_x, :scale_y, :object
+	attr_reader :source, :window, :x, :y, :z, :angle,  :scale_x, :scale_y, :object
+
+	def initialize source, window, x, y, z, angle, scale_x, scale_y
+		self.source = source
+		self.window = window  
+		self.x = x 
+		self.y = y
+		self.z = z 
+		self.angle = angle
+		self.scale_x = scale_x
+		self.scale_y = scale_y
 	end
-	#Override Gosu::Image#draw and set x, y and z params
-	def draw x, y, z
-		#Create our GameObject by passing our source image as a string
-		@GameObject = Gosu::Image.from_text(self, @source, Gosu.default_font_name, 30)
-		#Draw our image
-		@GameObject.draw(x, y, z) 
+
+	def draw source, x, y, z, angle, scale_x, scale_y
+		self.object = Gosu::Image.from_text self.window, source, Gosu.default_font_name, 60
+		self.object.draw_rot x, y, z, angle, 0.5, 0.5, scale_x, scale_y	
 	end
 end
+
+# Note: The gameobjects features are subject to change by making them
+# parameters that can be passed in the GameWindow class. They can each 
+# be altered and returned (set and get). source = source image (in this case a string),
+# x, y = location on the screen, z = which layer the image is on, angle, can be used
+# to rotate the image, scale_x and scale_y can be used to flip the image on
+# it's vertical and horizontal axis.
